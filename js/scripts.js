@@ -23,20 +23,25 @@ const saveTodo = (text, done = false, save = 1) => {
     titleTodo.textContent = text;
     todo.appendChild(titleTodo);
 
+    const todoButton = document.createElement('div')
+    todoButton.classList.add('todo-button')
+
     const doneBtn = document.createElement('button');
     doneBtn.classList.add('finish-todo');
     doneBtn.innerHTML = `<i class="fa-solid fa-check"></i>`
-    todo.appendChild(doneBtn);
+    todoButton.appendChild(doneBtn);
 
     const editBtn = document.createElement('button');
     editBtn.classList.add('edit-todo');
     editBtn.innerHTML = `<i class="fa-solid fa-pen"></i>`
-    todo.appendChild(editBtn);
+    todoButton.appendChild(editBtn);
 
     const deleteBtn = document.createElement('button');
     deleteBtn.classList.add('remove-todo');
     deleteBtn.innerHTML = `<i class="fa-solid fa-xmark"></i>`
-    todo.appendChild(deleteBtn);
+    todoButton.appendChild(deleteBtn);
+
+    todo.appendChild(todoButton)
 
 
     if (done) {

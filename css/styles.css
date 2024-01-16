@@ -12,9 +12,7 @@ html {
 }
 
 body {
- background-image: url('../img/bg.jpg');
- background-repeat: no-repeat;
- background-size: cover;
+  background-color: rgb(9, 9, 10);
  -webkit-font-smoothing: antialiased;
  height: 100vh;
 }
@@ -166,7 +164,6 @@ input, select {
 }
 
 .todo h3 {
-  flex: 1;
   font-size: 0.9rem;
 }
 
@@ -182,4 +179,45 @@ input, select {
   text-decoration: line-through;
   color: #fff;
   font-style: italic;
+}
+
+@media (max-width: 600px) {
+  .todo-container {
+    width: 300px;
+  }
+
+  #toolbar {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  #search {
+    border-right: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+  }
+
+  #filter {
+    width: 45%;
+  }
+
+  .todo {
+    display: block;
+
+  }
+
+  .todo h3 {
+    text-align: center;
+  }
+
+  .todo-button {
+    display: flex;
+    margin-top: 1rem;
+    justify-content: space-evenly;
+  }
+
+  button {
+    display: block;
+  }
 }
