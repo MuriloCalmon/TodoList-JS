@@ -163,6 +163,10 @@ input, select {
   transition: .3s;
 }
 
+.todo-button {
+  display: flex;
+}
+
 .todo h3 {
   font-size: 0.9rem;
 }
@@ -183,7 +187,10 @@ input, select {
 
 @media (max-width: 600px) {
   .todo-container {
-    width: 300px;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    border-radius: 0;
   }
 
   #toolbar {
