@@ -21,6 +21,7 @@ const saveTodo = (text, done = false, save = 1) => {
 
     const titleTodo = document.createElement('h3');
     titleTodo.textContent = text;
+    titleTodo.classList.add('title-todo')
     todo.appendChild(titleTodo);
 
     const todoButton = document.createElement('div')
@@ -150,17 +151,18 @@ document.addEventListener('click', (e) => {
 
     let titleTodo;
 
-    if (e.target.parentElement && e.target.parentElement.querySelector('h3')) {
-        titleTodo = e.target.parentElement.querySelector('h3').innerText;
-    }
+    titleTodo = document.querySelector('.title-todo').innerText
 
     if (e.target.classList.contains('remove-todo')) {
-        e.target.parentElement.remove();
+        const removeTodo = document.querySelector('.todo')
+        removeTodo.remove();
 
         removeTodoLocalStorage(titleTodo)
     }
     if (e.target.classList.contains('finish-todo')) {
-        e.target.parentElement.classList.toggle('done');
+        const doneTodo = document.querySelector('.todo')
+        doneTodo.classList.toggle('done')
+        
 
         updateTodosStatusLocalStorage(titleTodo);
     }

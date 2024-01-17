@@ -187,8 +187,8 @@ input, select {
 
 @media (max-width: 600px) {
   .todo-container {
-    width: 100vw;
-    height: 100vh;
+    min-width: 100vw;
+    min-height: 100vh;
     margin: 0;
     border-radius: 0;
   }
