@@ -15,6 +15,17 @@ let oldInpuutValue;
 //Funções
 
 //Salvar um todo, cria toda estrutura html com js, e adiciona o titulo digitado
+
+const controlFlexBlock = (todo) => {
+    const windowWidth = window.innerWidth;
+
+    if (windowWidth > 600) {
+        todo.style.display = 'flex';
+    }else {
+        todo.style.display = 'block'
+    }
+}
+
 const saveTodo = (text, done = false, save = 1) => {
     const todo = document.createElement('div');
     todo.classList.add('todo');
@@ -95,7 +106,7 @@ const getSearchTodos = (search) => {
 
         const normalizedSearch = search.toLowerCase();
 
-        todo.style.display = 'flex';
+        controlFlexBlock(todo)
 
         //se o titleTodo não tiver o que foi digitado na busca, esse todo receberá display de none
         if (!titleTodo.includes(normalizedSearch)) {
@@ -113,18 +124,18 @@ const filterTodos = (filter) => {
     switch (filter) {
         case 'all':
             todos.forEach((todo) => {
-                todo.style.display = 'flex';
+                controlFlexBlock(todo)
             })
             break;
         case 'done':
             todos.forEach((todo) => todo.classList.contains('done') 
-            ? todo.style.display = 'flex' 
+            ? controlFlexBlock(todo) 
             : todo.style.display = 'none');
             break;
         case 'todo':
             todos.forEach((todo) => todo.classList.contains('done') 
             ? todo.style.display = 'none' 
-            : todo.style.display = 'flex');
+            : controlFlexBlock(todo));
             break;
         
         default:
@@ -149,30 +160,30 @@ todoForm.addEventListener('submit', (e) => {
 // Fica escutando qualquer clique no documento, até o target for algum botão desejado para realizar uma ação
 document.addEventListener('click', (e) => {
 
-    let titleTodo;
+    const targetEl = e.target;
+    const parentEl = targetEl.closest('div') // pega a div dos botões
+    const todoList = parentEl.parentElement // pega a div do todoList
+    let titleTodo = todoList.querySelector('h3')
 
-    titleTodo = document.querySelector('.title-todo').innerText
 
     if (e.target.classList.contains('remove-todo')) {
-        const removeTodo = document.querySelector('.todo')
-        removeTodo.remove();
+        todoList.remove()
 
-        removeTodoLocalStorage(titleTodo)
+
+        removeTodoLocalStorage(titleTodo.innerText)
     }
     if (e.target.classList.contains('finish-todo')) {
-        const doneTodo = document.querySelector('.todo')
-        doneTodo.classList.toggle('done')
+        todoList.classList.toggle('done')
         
-
-        updateTodosStatusLocalStorage(titleTodo);
+        updateTodosStatusLocalStorage(titleTodo.innerText);
     }
 
     if (e.target.classList.contains('edit-todo')) {
         toogleForms();
 
-        editInput.value = titleTodo;
+        editInput.value = titleTodo.innerText;
         // oldInputValue recebe o titleTodo para comparação de update
-        oldInpuutValue = titleTodo;
+        oldInpuutValue = titleTodo.innerText;
     }
 })
 
@@ -263,7 +274,7 @@ const updateTodosStatusLocalStorage = (todoText) => {
 const updateTodoLocaStorage = (todoOldText, todoNewText) => {
     const todos = getTodosLocalStorage();
 
-    todos.map((todo) => todo.text === todoOldText ? (todo.done = todoNewText) : null)
+    todos.map((todo) => todo.text === todoOldText ? (todo.text = todoNewText) : null)
 
     localStorage.setItem('todos', JSON.stringify(todos))
 

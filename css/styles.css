@@ -169,6 +169,7 @@ input, select {
 
 .todo h3 {
   font-size: 0.9rem;
+  flex: 1;
 }
 
 .todo button {
@@ -202,11 +203,11 @@ input, select {
     border-right: none;
     padding: 0;
     margin: 0;
-    width: 100%;
+    width: 50%;
   }
 
   #filter {
-    width: 45%;
+    width: 50%;
   }
 
   .todo {
@@ -226,5 +227,9 @@ input, select {
 
   button {
     display: block;
+  }
+  
+  .form-control input {
+    width: 41%;
   }
 }
